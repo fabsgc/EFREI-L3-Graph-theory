@@ -1,0 +1,277 @@
+##############################################
+################### GRAPHE ###################
+##############################################
+ 1. Lecture d'un graphe classique
+ 2. Lecture d'un graphe avec contrainte
+ 3. Quitter
+
+Votre choix: 1
+Nom du graphe : g1
+
+#### Matrice d'indidence
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  X  X  X  0
+1  | X  X  X  1  X  X  X  X
+2  | X  2  X  X  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+#### Creation de la fermeture transitive
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  X  X  X  0
+1  | X  X  X  1  X  X  X  X
+2  | X  2  X  3  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  X  X  0
+1  | X  X  X  1  X  X  X  X
+2  | X  2  X  3  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  X  X  X  X
+2  | X  2  X  3  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  X  X  X
+2  | X  2  X  3  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  4  X  X
+2  | X  2  X  3  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  4  X  4
+2  | X  2  X  3  2  X  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  4  X  4
+2  | X  2  X  3  2  6  X  X
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  4  X  4
+2  | X  2  X  3  2  6  X  6
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  X
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  4  X  4
+2  | X  2  X  3  2  6  X  6
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  9
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  X
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5  6  7
+     -- -- -- -- -- -- -- --
+0  | X  0  X  0  3  3  X  0
+1  | X  X  X  1  4  4  X  4
+2  | X  2  X  3  2  6  X  6
+3  | X  X  X  X  3  3  X  3
+4  | X  X  X  X  X  4  X  9
+5  | X  X  X  X  X  X  X  5
+6  | X  X  X  X  6  6  X  11
+7  | X  X  X  X  X  X  X  X
+
+-------------------
+
+
+#### Detection de circuits
+
+# Ce graphe ne possede aucun circuit
+
+#### Calcul du rang
+
+########## ITERATION 1
+sommet 0 a pour predecesseurs :
+sommet 1 a pour predecesseurs :0 2
+sommet 2 a pour predecesseurs :
+sommet 3 a pour predecesseurs :0 1
+sommet 4 a pour predecesseurs :2 3 6
+sommet 5 a pour predecesseurs :3 4 6
+sommet 6 a pour predecesseurs :
+sommet 7 a pour predecesseurs :0 3 5
+-------------------
+sommet 0 :
+    rang: 1
+    ordre: 0
+sommet 2 :
+    rang: 1
+    ordre: 1
+sommet 6 :
+    rang: 1
+    ordre: 2
+########## ITERATION 2
+sommet 1 a pour predecesseurs :
+sommet 3 a pour predecesseurs :1
+sommet 4 a pour predecesseurs :3
+sommet 5 a pour predecesseurs :3 4
+sommet 7 a pour predecesseurs :3 5
+-------------------
+sommet 1 :
+    rang: 2
+    ordre: 3
+########## ITERATION 3
+sommet 3 a pour predecesseurs :
+sommet 4 a pour predecesseurs :3
+sommet 5 a pour predecesseurs :3 4
+sommet 7 a pour predecesseurs :3 5
+-------------------
+sommet 3 :
+    rang: 3
+    ordre: 4
+########## ITERATION 4
+sommet 4 a pour predecesseurs :
+sommet 5 a pour predecesseurs :4
+sommet 7 a pour predecesseurs :5
+-------------------
+sommet 4 :
+    rang: 4
+    ordre: 5
+########## ITERATION 5
+sommet 5 a pour predecesseurs :
+sommet 7 a pour predecesseurs :5
+-------------------
+sommet 5 :
+    rang: 5
+    ordre: 6
+########## ITERATION 6
+sommet 7 a pour predecesseurs :
+-------------------
+sommet 7 :
+    rang: 6
+    ordre: 7
+
+
+sommet 0 :
+    rang: 1
+    ordre: 0
+sommet 1 :
+    rang: 2
+    ordre: 3
+sommet 2 :
+    rang: 1
+    ordre: 1
+sommet 3 :
+    rang: 3
+    ordre: 4
+sommet 4 :
+    rang: 4
+    ordre: 5
+sommet 5 :
+    rang: 5
+    ordre: 6
+sommet 6 :
+    rang: 1
+    ordre: 2
+sommet 7 :
+    rang: 6
+    ordre: 7
+
+#### Dates au plus tot
+
+date au plus tot de 0 : 0
+date au plus tot de 2 : 0
+date au plus tot de 6 : 0
+date au plus tot de 1 : 2
+date au plus tot de 3 : 3
+date au plus tot de 4 : 6
+date au plus tot de 5 : 10
+date au plus tot de 7 : 15
+
+#### Dates au plus tard
+
+date au plus tard de 7 : 15
+date au plus tard de 5 : 10
+date au plus tard de 4 : 6
+date au plus tard de 3 : 3
+date au plus tard de 1 : 2
+date au plus tard de 6 : 0
+date au plus tard de 2 : 0
+date au plus tard de 0 : 2
+
+Le graphe possede plusieurs entrees
+Le sommet 0 n'est pas accessible depuis l'entree
+Le sommet 1 n'est pas accessible depuis l'entree
+Le sommet 2 n'est pas accessible depuis l'entree
+Le sommet 3 n'est pas accessible depuis l'entree
+
+Appuyez sur une touche pour continuer...

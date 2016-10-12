@@ -1,0 +1,278 @@
+##############################################
+################### GRAPHE ###################
+##############################################
+ 1. Lecture d'un graphe classique
+ 2. Lecture d'un graphe avec contrainte
+ 3. Quitter
+
+Votre choix: 2
+Nom du graphe : c1
+
+La tache 1 dure 10 et depend des taches:
+  - 2
+La tache 2 dure 20 et depend des taches:
+  - 3
+La tache 3 dure 30 et depend des taches:
+La tache 4 dure 40 et depend des taches:
+  - 1
+  - 2
+  - 3
+sommet sans predecesseur :3
+sommet sans successeur :4
+#### Matrice d'indidence
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  X  X  0  X  X
+1  | X  X  X  X  10 X
+2  | X  20 X  X  20 X
+3  | X  X  30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+#### Liste des arcs
+
+0 3 0
+1 4 10
+2 1 20
+2 4 20
+3 2 30
+3 4 30
+4 5 40
+
+#### Creation de la fermeture transitive
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  X  X  0  X  X
+1  | X  X  X  X  10 X
+2  | X  20 X  X  20 X
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 X  0  X  X
+1  | X  X  X  X  10 X
+2  | X  20 X  X  20 X
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  X  X
+1  | X  X  X  X  10 X
+2  | X  20 X  X  20 X
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  30 X
+1  | X  X  X  X  10 X
+2  | X  20 X  X  20 X
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  30 70
+1  | X  X  X  X  10 X
+2  | X  20 X  X  20 X
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  30 70
+1  | X  X  X  X  10 50
+2  | X  20 X  X  20 X
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  30 70
+1  | X  X  X  X  10 50
+2  | X  20 X  X  20 60
+3  | X  50 30 X  30 X
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  30 70
+1  | X  X  X  X  10 50
+2  | X  20 X  X  20 60
+3  | X  50 30 X  30 70
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+-------------------
+
+#### Matrice d'indidence
+
+    0  1  2  3  4  5
+     -- -- -- -- -- --
+0  | X  50 30 0  30 70
+1  | X  X  X  X  10 50
+2  | X  20 X  X  20 60
+3  | X  50 30 X  30 70
+4  | X  X  X  X  X  40
+5  | X  X  X  X  X  X
+
+#### Calcul du rang
+
+########## ITERATION 1
+sommet 0 a pour predecesseurs :
+sommet 1 a pour predecesseurs :2
+sommet 2 a pour predecesseurs :3
+sommet 3 a pour predecesseurs :0
+sommet 4 a pour predecesseurs :1 2 3
+sommet 5 a pour predecesseurs :4
+-------------------
+sommet 0 :
+    rang: 1
+    ordre: 0
+########## ITERATION 2
+sommet 1 a pour predecesseurs :2
+sommet 2 a pour predecesseurs :3
+sommet 3 a pour predecesseurs :
+sommet 4 a pour predecesseurs :1 2 3
+sommet 5 a pour predecesseurs :4
+-------------------
+sommet 3 :
+    rang: 2
+    ordre: 1
+########## ITERATION 3
+sommet 1 a pour predecesseurs :2
+sommet 2 a pour predecesseurs :
+sommet 4 a pour predecesseurs :1 2
+sommet 5 a pour predecesseurs :4
+-------------------
+sommet 2 :
+    rang: 3
+    ordre: 2
+########## ITERATION 4
+sommet 1 a pour predecesseurs :
+sommet 4 a pour predecesseurs :1
+sommet 5 a pour predecesseurs :4
+-------------------
+sommet 1 :
+    rang: 4
+    ordre: 3
+########## ITERATION 5
+sommet 4 a pour predecesseurs :
+sommet 5 a pour predecesseurs :4
+-------------------
+sommet 4 :
+    rang: 5
+    ordre: 4
+########## ITERATION 6
+sommet 5 a pour predecesseurs :
+-------------------
+sommet 5 :
+    rang: 6
+    ordre: 5
+
+
+sommet 0 :
+    rang: 1
+    ordre: 0
+sommet 1 :
+    rang: 4
+    ordre: 3
+sommet 2 :
+    rang: 3
+    ordre: 2
+sommet 3 :
+    rang: 2
+    ordre: 1
+sommet 4 :
+    rang: 5
+    ordre: 4
+sommet 5 :
+    rang: 6
+    ordre: 5
+
+#### Dates au plus tot
+
+date au plus tot de 0 : 0
+date au plus tot de 3 : 0
+date au plus tot de 2 : 30
+date au plus tot de 1 : 50
+date au plus tot de 4 : 60
+date au plus tot de 5 : 100
+
+#### Dates au plus tard
+
+date au plus tard de 5 : 100
+date au plus tard de 4 : 60
+date au plus tard de 1 : 50
+date au plus tard de 2 : 30
+date au plus tard de 3 : 0
+date au plus tard de 0 : 0
+##########################
+##### EDITEUR PROJET #####
+##########################
+
+1. Ajouter une tache
+2. Supprimer une tache
+3. Ajouter une contrainte
+4. Supprimer une contrainte
+5. Modifier la duree d'execution
+6. Modifier la date de fin du projet
+7. Quitter
+8. Afficher le rang
+9. Afficher la matrice d'adjacence
+10.Afficher la liste des arcs
+11.Afficher la matrice de la fermeture transitive
+
+Votre choix: 1
+########### Ajout d'une tache
+
+Duree de la tache:10
+De quelles taches depend cette tache (-1 pour arreter):
+tache: 2
+tache: -1
+Quelles taches sont influencees par cette tache (-1 pour arreter):
+tache: 5
+tache: -1
+Le graphe est un graphe d'ordonnancement, la tache a ete ajoutee
+##########################
+##### EDITEUR PROJET #####
+##########################
+
+1. Ajouter une tache
+2. Supprimer une tache
+3. Ajouter une contrainte
+4. Supprimer une contrainte
+5. Modifier la duree d'execution
+6. Modifier la date de fin du projet
+7. Quitter
+8. Afficher le rang
+9. Afficher la matrice d'adjacence
+10.Afficher la liste des arcs
+11.Afficher la matrice de la fermeture transitive
+
+Votre choix:
